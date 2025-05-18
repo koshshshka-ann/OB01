@@ -56,3 +56,15 @@ class Store():
         valid_price = self.validate_price(new_price)
         if valid_price is not None:
             self.items[product_name] = valid_price
+
+store1 = Store("Свежие продукты", "г. Москва, ул. Строителей, д.12")
+store1.add_item("Хлеб свежий", 75.00)
+store1.add_item("Молоко свежее", 130.00)
+
+store2 = Store("Питерские фрукты", "г. С.-Петербург, Невский пр-т, д.50")
+store2.add_item("Бананы из Питера", 100.00)
+store2.add_item("Ананасы из Питера", 250.00)
+
+store3 = Store("Гастроном", "г. Казань, ул. Садовая, д.19")
+store3.add_item("Колбаса отменная", 500.00)
+store3.add_item("Сосиски шикарные", 275.00)
