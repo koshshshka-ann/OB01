@@ -10,7 +10,8 @@ class Task():
         if not status:
             Task.current_tasks.append(self) # все задачи со статусом False добавляются в список текущих
 
-    def add_task(self, description, deadline=None, status=False):
+    @staticmethod
+    def add_task(description, deadline=None, status=False):
         new_task = Task(description, deadline, status)
         return new_task
 
@@ -19,15 +20,17 @@ class Task():
             self.status=True
             Task.current_tasks.remove(self)
 
-    def marc_undone(self):
+    def mark_undone(self):
         if self.status:
             self.status=False
             Task.current_tasks.append(self)
 
-    def get_current_list(self):
+    @staticmethod
+    def get_current_list():
         return list(Task.current_tasks)
 
-    def print_current_list(self):
+    @staticmethod
+    def print_current_list():
         print(f"\nСписок текущих задач:")
 
         if not Task.current_tasks:
@@ -40,3 +43,21 @@ class Task():
                 deadline_info = f" до {current_task.deadline}" if current_task.deadline else ""
                 print(f"{i}. {current_task.description}{deadline_info}")
                 i += 1
+
+task1 = Task.add_task("Помыть кошек", "20/05/2025")
+task2 = Task.add_task("Сделать кошкам маникюр", None)
+task3 = Task.add_task("Выполнить домашку Zerocoder", "18/05/2025")
+
+Task.print_current_list()
+
+task3.mark_done()
+print(f"\nПосле mark_done(): {task3.description}: {task3.status}")
+
+task3.mark_undone()
+print(f"\nПосле mark_undone(): {task3.description}: {task3.status}")
+
+task1.mark_done()
+task2.mark_done()
+task3.mark_done()
+
+Task.print_current_list()
