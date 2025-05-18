@@ -21,16 +21,19 @@
 
 class Store():
 
-    def __init__(self, name: str, address: float):
+    def __init__(self, name: str, address: str):
         self.name = name
         self.address = address
         self.items: dict[str, float] = {}
 
     def validate_price(self, price: float):
         try:
+            if price <= 0:
+                raise ValueError("Цена должна быть больше 0!")
             return float(price)
-        except ValueError:
-            print("Цена должна быть числом!")
+        except (TypeError, ValueError):
+            print("Цена должна быть положительным числом!")
+            return None
 
     def add_item(self, product_name: str, price: float):
         valid_price = self.validate_price(price)
