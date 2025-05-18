@@ -44,18 +44,25 @@ class Store():
         if product_name in self.items:
             del self.items[product_name]
         else:
-            print(f"Товар '{product_name}' не найден!")
+            print(f"\nТовар '{product_name}' не найден!")
 
     def get_price(self, product_name: str):
-        return self.items.get(product_name)
+        gotten_price = self.items.get(product_name)
+        if gotten_price is not None:
+            print(f"\nЦена на '{product_name}': {gotten_price}")
+        else:
+            print(f"\nТовар '{product_name}' не найден!")
+        return gotten_price
 
     def update_price(self, product_name: str, new_price: float):
         if product_name not in self.items:
-            print(f"Товар '{product_name}' не найден!")
+            print(f"\nТовар '{product_name}' не найден!")
+            return
 
         valid_price = self.validate_price(new_price)
         if valid_price is not None:
             self.items[product_name] = valid_price
+            print(f"\nНовая цена на '{product_name}': {valid_price}")
 
 store1 = Store("Свежие продукты", "г. Москва, ул. Строителей, д.12")
 store1.items = {
@@ -75,5 +82,21 @@ store3.items = {
     "Сосиски шикарные": 275.00
 }
 
+print(f"\nНазвание: '{store1.name}',\nАдрес: {store1.address},\nТовары в наличии: {store1.items}")
+print(f"\nНазвание: '{store2.name}',\nАдрес: {store2.address},\nТовары в наличии: {store2.items}")
+print(f"\nНазвание: '{store3.name}',\nАдрес: {store3.address},\nТовары в наличии: {store3.items}")
 
+store1.add_item("Масло свежее", 250.00)
+store1.add_item("Кефир свежий", 150.00)
+store1.add_item("Баклажан свежий", -150.00)
+print(f"\nТовары в магазине '{store1.name}' в наличии: {store1.items}")
 
+store1.remove_item("Молоко свежее")
+store1.remove_item("Мандарины свежие")
+print(f"\nТовары в магазине '{store1.name}' в наличии: {store1.items}")
+
+store1.get_price("Хлеб свежий")
+store1.get_price("Баклажан свежий")
+
+store1.update_price("Хлеб свежий", 85.00)
+store1.update_price("Артишок свежий", 185.00)
