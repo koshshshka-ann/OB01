@@ -18,3 +18,28 @@
 
 # 3. Протестировать методы:
 # Выбери один из созданных магазинов и протестируй все его методы: добавь товар, обнови цену, убери товар и запрашивай цену.
+
+class Store():
+
+    def __init__(self, name: str, address: float):
+        self.name = name
+        self.address = address
+        self.items: dict[str, float] = {}
+
+    def add_item(self, product_name: str, price: float):
+        self.items[str(product_name)] = float(price)
+
+    def remove_item(self, product_name: str):
+        if product_name in self.items:
+            del self.items[product_name]
+        else:
+            print(f"Товар '{product_name}' не найден!")
+
+    def get_price(self, product_name: str):
+        return self.items.get(product_name)
+
+    def change_price(self, product_name: str, new_price: float):
+        if product_name in self.items:
+            self.items[product_name] = float(new_price)
+        else:
+            print(f"Товар '{product_name}' не найден!")
