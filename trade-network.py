@@ -55,14 +55,15 @@ class Store():
         return gotten_price
 
     def update_price(self, product_name: str, new_price: float):
-        if product_name not in self.items:
+        if product_name in self.items:
+            valid_price = self.validate_price(new_price)
+            if valid_price is not None:
+                self.items[product_name] = valid_price
+                print(f"\nНовая цена на '{product_name}': {valid_price}")
+        else:
             print(f"\nТовар '{product_name}' не найден!")
-            return
 
-        valid_price = self.validate_price(new_price)
-        if valid_price is not None:
-            self.items[product_name] = valid_price
-            print(f"\nНовая цена на '{product_name}': {valid_price}")
+
 
 store1 = Store("Свежие продукты", "г. Москва, ул. Строителей, д.12")
 store1.items = {
