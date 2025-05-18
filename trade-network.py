@@ -26,8 +26,16 @@ class Store():
         self.address = address
         self.items: dict[str, float] = {}
 
+    def validate_price(self, price: float):
+        try:
+            return float(price)
+        except ValueError:
+            print("Цена должна быть числом!")
+
     def add_item(self, product_name: str, price: float):
-        self.items[str(product_name)] = float(price)
+        valid_price = self.validate_price(price)
+        if valid_price is not None:
+            self.items[str(product_name)] = float(price)
 
     def remove_item(self, product_name: str):
         if product_name in self.items:
@@ -38,8 +46,10 @@ class Store():
     def get_price(self, product_name: str):
         return self.items.get(product_name)
 
-    def change_price(self, product_name: str, new_price: float):
-        if product_name in self.items:
-            self.items[product_name] = float(new_price)
-        else:
+    def update_price(self, product_name: str, new_price: float):
+        if product_name not in self.items:
             print(f"Товар '{product_name}' не найден!")
+
+        valid_price = self.validate_price(new_price)
+        if valid_price is not None:
+            self.items[product_name] = valid_price
