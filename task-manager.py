@@ -2,8 +2,23 @@
 
 class Task():
 
-    def __init__(self, name, description, deadline=None, status=False):
-        self.name = name
+    current_tasks = [] # список текущих задач (задачи, где status=False)
+
+    def __init__(self, description, deadline=None, status=False): # инициализация объекта
         self.description = description
         self.deadline = deadline
         self.status = status
+        if not status:
+            Task.current_tasks.append(self) # все задачи со статусом False добавляются в список текущих
+
+    def add_task(self, description, deadline=None, status=False):
+        new_task = Task(description, deadline, status)
+        return new_task
+
+    def mark_done(self): # меняем статус на "выполнено" и удаляем из текущих
+        self.status=True
+        Task.current_tasks.remove(self)
+
+    def marc_undone(self):
+        self.status=False
+        Task.current_tasks.append(self)
