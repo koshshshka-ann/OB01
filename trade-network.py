@@ -47,6 +47,7 @@ class Store():
     def remove_item(self, product_name: str):
         if product_name in self.items:
             del self.items[product_name]
+            print(f"\nТовар '{product_name}' удален из ассортимента '{self.name}'")
         else:
             print(f"\nТовар '{product_name}' не найден!")
 
