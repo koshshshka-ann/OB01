@@ -36,3 +36,14 @@ class Task():
             for task in self.task_list:
                print(f"{i}. {task['description']}. Выполнить до {task['deadline']}")
                i += 1
+
+t = Task()
+
+t.add_task("Помыть кошек", "20.05.2025")
+t.add_task("Сделать кошкам маникюр", "21.05.2025")
+
+t.current_tasks()
+
+t.task_done("Помыть кошек")
+
+t.current_tasks()
