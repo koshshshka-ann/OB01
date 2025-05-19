@@ -20,11 +20,12 @@ class Task():
             if task["description"] == description:
                 task["status"] = "выполнено"
                 print(f"\nЗадача '{task['description']}' выполнена!")
-                self.task_list.remove(task)
+                self.task_list.remove(task) # Удаление задачи из списка текущих, если статус поменялся
                 return
             else:
                 print(f"\nЗадача '{task}' НЕ найдена!")
 
+    # Метод. Вывод списка текущих задач
     def current_tasks(self):
 
         if not self.task_list:
@@ -37,6 +38,7 @@ class Task():
                print(f"{i}. {task['description']}. Выполнить до {task['deadline']}")
                i += 1
 
+# === Проверка ===
 t = Task()
 
 t.add_task("Помыть кошек", "20.05.2025")
