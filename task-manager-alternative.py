@@ -1,6 +1,7 @@
 # Задача: Создай класс Task, который позволяет управлять задачами (делами). У задачи должны быть атрибуты: описание задачи, срок выполнения и статус (выполнено/не выполнено). Реализуй функцию для добавления задач, отметки выполненных задач и вывода списка текущих (не выполненных) задач.
 
 class Task():
+
     # Инициация. Создаем список
     def __init__(self):
         self.task_list = []
@@ -14,12 +15,12 @@ class Task():
         })
 
     # Метод. Поменять статус на "выполнено"
-    def task_done(self):
+    def task_done(self, description):
         for task in self.task_list:
-            if task["description"] == "НЕ выполнено":
-                task["description"] = "выполнено"
-                print(f"\nЗадача '{task}' выполнена!")
-                self.task_list.remove(task["description"])
+            if task["description"] == description:
+                task["status"] = "выполнено"
+                print(f"\nЗадача '{task['description']}' выполнена!")
+                self.task_list.remove(task)
                 return
             else:
                 print(f"\nЗадача '{task}' НЕ найдена!")
@@ -35,4 +36,3 @@ class Task():
             for task in self.task_list:
                print(f"{i}. {task['description']}. Выполнить до {task['deadline']}")
                i += 1
-        
